@@ -19,5 +19,9 @@ The taxonomy is **bidirectional and multi-actor**:
 ## Why it's useful for red-teaming
 A named catalog of *how AI outputs go wrong* is a probe library: each failure mode is a hypothesis to test against a model under adversarial conditions. The definitions are deliberately mechanism-level so they generalize across models and tasks.
 
+## The bobo framework — responsibility + forensic accounting
+
+The taxonomy names *how things go wrong*; the bobo framework governs *what happens after*. Its responsibility philosophy: **the party that caused the harm takes responsibility and is an active constructor of the transformative remediation** — modeled on transformative justice (full framework: `gozonerd/mthd-llm-transformative-solutions-framework-hub`). Its reckoning instrument is **forensic accounting** — the responsible party's own receipts-not-narrative reconstruction of its work, whose output is the requirements document for the structural fix. Method + the inaugural code-build exemplar: `docs/Forensic_Accounting_2026-08-03_v01_I.md`.
+
 ## Provenance
 Identified and directed by Krystal Martinez across production AI evaluation work; membership cross-architecturally reviewed. AIGHVA (AI-assisted generation, human-verified accurate). Evidence layer held privately.
