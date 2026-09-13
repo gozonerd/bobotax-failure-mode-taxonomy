@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoboTax — the Quad Axes of Prevention Leverage</title>
+<style>
+  :root{
+    --A:#7c3aed; --B:#f59e0b; --C:#2563eb; --D:#db2777;
+    --ink:#e5e7eb; --muted:#9ca3af; --bg0:#0b1020; --bg1:#131a31; --line:#243049;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:radial-gradient(1200px 700px at 50% 0%,#172447 0%,var(--bg0) 60%);
+    color:var(--ink);line-height:1.5;padding:24px;min-height:100vh;}
+  h1{font-size:23px;margin:0 0 2px;letter-spacing:.2px;}
+  .sub{color:var(--muted);margin:0 0 16px;font-size:14px;max-width:760px;}
+  .wrap{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start;}
+  .stage{background:linear-gradient(180deg,var(--bg1),#0e1426);border:1px solid var(--line);
+    border-radius:18px;padding:10px;box-shadow:0 10px 40px rgba(0,0,0,.45);}
+  svg{display:block;touch-action:none;}
+  .handle{cursor:grab;} .handle:active{cursor:grabbing;}
+  .panel{flex:1;min-width:300px;max-width:430px;}
+  .dom{border-radius:14px;padding:14px 16px;background:#0e1730;border:1px solid var(--line);
+    margin-bottom:14px;font-size:15px;}
+  .dom b{font-size:17px;}
+  .axis{border-radius:13px;padding:11px 13px;margin-bottom:9px;border:1px solid var(--line);
+    background:#0e1426;}
+  .axis h3{margin:0 0 3px;font-size:15px;display:flex;align-items:center;gap:8px;}
+  .pill{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;color:#0b1020;}
+  .axis p{margin:2px 0;font-size:13px;color:#cbd5e1;}
+  .axis .lever{color:var(--muted);font-size:12.5px;}
+  .persona{font-size:11.5px;color:var(--muted);font-style:italic;}
+  .btns{display:flex;gap:7px;flex-wrap:wrap;margin:4px 0 16px;}
+  button{font:inherit;font-size:12.5px;padding:7px 11px;border-radius:10px;border:1px solid var(--line);
+    background:#0e1730;color:var(--ink);cursor:pointer;}
+  button:hover{background:#16203c;}
+  .cap{font-size:12.5px;color:var(--muted);margin-top:6px;}
+  .fwd{font-size:13px;color:#a7f3d0;background:#06281f;border:1px solid #114b38;border-radius:12px;
+    padding:10px 13px;margin-bottom:14px;}
+</style>
+</head>
+<body>
+  <h1>BoboTax — the four levers of prevention leverage</h1>
+  <p class="sub">Not a blame chart. Each axis is a <b>lever on the future</b>: <i>how much would a change at this level keep this failure from recurring?</i> Drag a lever out = more leverage there. The shaded shape is the failure's <b>leverage fingerprint</b>.</p>
+
+  <div class="wrap">
+    <div class="stage">
+      <svg id="svg" width="540" height="540"></svg>
+    </div>
+
+    <div class="panel">
+      <div class="fwd">↻ <b>Forward-looking.</b> The question is never "whose fault was it?" — it's "where is the lever for next time?" A frozen Opus-4.7 keeps shipping as-is unless <i>someone</i> changes something. Bobotax asks: who has the longest lever?</div>
+
+      <div class="dom" id="dom">…</div>
+
+      <div class="btns">
+        <button onclick="preset('Aglitch')">Run-unstable glitch</button>
+        <button onclick="preset('Buser')">User mis-prompt</button>
+        <button onclick="preset('Cbaked')">Baked-in bias</button>
+        <button onclick="preset('Dorch')">Bad RAG / guardrail</button>
+        <button onclick="preset('solo')">Solo build → B = D collapse</button>
+      </div>
+
+      <div class="axis" style="border-left:4px solid var(--C)">
+        <h3><span class="pill" style="background:var(--C)">C</span> the model developer &nbsp;🏛️</h3>
+        <p>The lab's humans — who chose the corpus, the RLHF, the architecture, and shipped the weights.</p>
+        <p class="lever">Lever: <b>a differently-built model.</b></p>
+        <p class="persona">Made of humans making choices — and the axis no industry taxonomy will name. Adverse-to-deflation by design.</p>
+      </div>
+      <div class="axis" style="border-left:4px solid var(--A)">
+        <h3><span class="pill" style="background:var(--A)">A</span> the model run / stochasticity &nbsp;🎲</h3>
+        <p>The dice at runtime — the same prompt resampled.</p>
+        <p class="lever">Lever: <b>re-run, self-consistency, an output gate.</b></p>
+        <p class="persona">A thing, not a person — no persona. High only for genuinely run-unstable failures.</p>
+      </div>
+      <div class="axis" style="border-left:4px solid var(--D)">
+        <h3><span class="pill" style="background:var(--D)">D</span> the deployer-org / orchestration &nbsp;🧩</h3>
+        <p>The team that built the deployment <i>around</i> the model.</p>
+        <p class="lever">Lever: <b>the RAG corpus, system prompt, tool wiring, guardrails, model-version choice.</b></p>
+        <p class="persona">A team with a persona. Distinct from B. (The "K4" finding that earned this axis.)</p>
+      </div>
+      <div class="axis" style="border-left:4px solid var(--B)">
+        <h3><span class="pill" style="background:var(--B)">B</span> the human using it &nbsp;🧑‍💻</h3>
+        <p>The person who prompts and operates it — the doctor typing the query.</p>
+        <p class="lever">Lever: <b>a better-formed request, added context, a user-side check.</b></p>
+        <p class="persona">A person with a persona. Distinct from D.</p>
+      </div>
+    </div>
+  </div>
+
+<script>
+const svg=document.getElementById('svg');
+const W=540,H=540,cx=270,cy=270,R=200;
+// axis layout: C up, A down, D left, B right
+const AX={
+  C:{dir:{x:0,y:-1}, color:'#2563eb', label:'C', v:0.5},
+  A:{dir:{x:0,y: 1}, color:'#7c3aed', label:'A', v:0.5},
+  D:{dir:{x:-1,y:0}, color:'#db2777', label:'D', v:0.5},
+  B:{dir:{x: 1,y:0}, color:'#f59e0b', label:'B', v:0.5},
+};
+const ORDER=['C','B','A','D']; // around the polygon
+const LEVELS=[['none',0],['low',.25],['moderate',.5],['high',.75],['decisive',1]];
+
+const NS="http://www.w3.org/2000/svg";
+function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+function pt(ax){const a=AX[ax];return {x:cx+a.dir.x*a.v*R, y:cy+a.dir.y*a.v*R};}
+
+function render(){
+  while(svg.firstChild)svg.removeChild(svg.firstChild);
+
+  // rings
+  LEVELS.forEach(([name,f])=>{
+    if(f===0)return;
+    svg.appendChild(el('circle',{cx,cy,r:f*R,fill:'none',stroke:'#1d2740','stroke-width':1}));
+    const t=el('text',{x:cx+4,y:cy-f*R+13,fill:'#3b4a6b','font-size':10}); t.textContent=name; svg.appendChild(t);
+  });
+  // spokes
+  for(const k in AX){const a=AX[k];
+    svg.appendChild(el('line',{x1:cx,y1:cy,x2:cx+a.dir.x*R,y2:cy+a.dir.y*R,stroke:'#243049','stroke-width':1.5}));
+  }
+
+  // leverage polygon
+  let d='';
+  ORDER.forEach((k,i)=>{const p=pt(k); d+=(i?'L':'M')+p.x+' '+p.y+' ';});
+  d+='Z';
+  // gradient-ish fill by averaging: just translucent slate with subtle glow
+  svg.appendChild(el('path',{d,fill:'rgba(99,102,241,0.16)',stroke:'#6366f1','stroke-width':2,'stroke-linejoin':'round'}));
+
+  // per-axis colored leg + handle
+  for(const k in AX){const a=AX[k]; const p=pt(k);
+    svg.appendChild(el('line',{x1:cx,y1:cy,x2:p.x,y2:p.y,stroke:a.color,'stroke-width':4,'stroke-linecap':'round'}));
+    const h=el('circle',{cx:p.x,cy:p.y,r:11,fill:a.color,stroke:'#0b1020','stroke-width':3,class:'handle'});
+    h.addEventListener('mousedown',e=>start(k,e));
+    h.addEventListener('touchstart',e=>start(k,e),{passive:false});
+    svg.appendChild(h);
+    // axis letter label out past the ring
+    const lx=cx+a.dir.x*(R+22), ly=cy+a.dir.y*(R+22);
+    const t=el('text',{x:lx,y:ly+6,fill:a.color,'font-size':22,'font-weight':800,'text-anchor':'middle'});
+    t.textContent=a.label; svg.appendChild(t);
+  }
+
+  // center failure node
+  svg.appendChild(el('circle',{cx,cy,r:30,fill:'#0b1020',stroke:'#475569','stroke-width':2}));
+  svg.appendChild(el('circle',{cx,cy,r:30,fill:'url(#g)'}));
+  const fi=el('text',{x:cx,y:cy-2,fill:'#f1f5f9','font-size':15,'font-weight':800,'text-anchor':'middle'}); fi.textContent='FI'; svg.appendChild(fi);
+  const fi2=el('text',{x:cx,y:cy+13,fill:'#94a3b8','font-size':9,'text-anchor':'middle'}); fi2.textContent='the failure'; svg.appendChild(fi2);
+
+  // glow def
+  const defs=el('defs',{}); const rg=el('radialGradient',{id:'g'});
+  rg.appendChild(el('stop',{offset:'0%','stop-color':'rgba(248,113,113,.55)'}));
+  rg.appendChild(el('stop',{offset:'100%','stop-color':'rgba(248,113,113,0)'}));
+  defs.appendChild(rg); svg.appendChild(defs);
+
+  // dominant readout
+  let best=null; for(const k in AX){if(!best||AX[k].v>AX[best].v)best=k;}
+  const vals=Object.keys(AX).map(k=>AX[k].v);
+  const top=Math.max(...vals);
+  const cods=Object.keys(AX).filter(k=>top-AX[k].v<0.06);
+  const LV=v=>{let n='none';LEVELS.forEach(([nm,f])=>{if(v>=f-0.001)n=nm;});return n;};
+  const levers={C:'a differently-built model',A:'re-running / an output gate',D:'fixing the RAG, prompt, or guardrails',B:'a better-formed request'};
+  const dom=document.getElementById('dom');
+  if(cods.length>1){
+    dom.innerHTML=`Dominant lever: <b>${cods.join(' = ')}</b> &nbsp;<span style="color:#9ca3af">(co-dominant)</span><br><span style="color:#cbd5e1;font-size:13.5px">More than one level shares the longest lever — the leverage is split.</span>`;
+  } else {
+    dom.innerHTML=`Dominant lever: <b style="color:${AX[best].color}">${best}</b> — leverage <b>${LV(top)}</b>.<br><span style="color:#cbd5e1;font-size:13.5px">Most prevention comes from <b>${levers[best]}</b>.</span>`;
+  }
+}
+
+let drag=null;
+function start(k,e){drag=k;e.preventDefault();}
+function move(e){
+  if(!drag)return;
+  const r=svg.getBoundingClientRect();
+  const mx=(e.touches?e.touches[0].clientX:e.clientX)-r.left-cx;
+  const my=(e.touches?e.touches[0].clientY:e.clientY)-r.top-cy;
+  const a=AX[drag];
+  let v=(mx*a.dir.x+my*a.dir.y)/R;     // project mouse onto axis
+  a.v=Math.max(0,Math.min(1,v));
+  render();
+}
+function end(){drag=null;}
+window.addEventListener('mousemove',move);
+window.addEventListener('touchmove',move,{passive:false});
+window.addEventListener('mouseup',end);
+window.addEventListener('touchend',end);
+
+function preset(name){
+  const P={
+    Aglitch:{A:.9,B:.2,C:.3,D:.2},
+    Buser:  {A:.15,B:.9,C:.2,D:.35},
+    Cbaked: {A:.2,B:.15,C:.92,D:.3},
+    Dorch:  {A:.2,B:.3,C:.35,D:.9},
+    solo:   {A:.25,B:.75,C:.4,D:.75},
+  }[name];
+  for(const k in P)AX[k].v=P[k];
+  render();
+  if(name==='solo'){
+    const d=document.getElementById('dom');
+    d.innerHTML+='<br><span style="color:#fbbf24;font-size:12.5px">⚠ In a single-user build, the user IS the orchestrator — B and D collapse into one person. That\'s why they feel like one thing until you split the teams.</span>';
+  }
+}
+render();
+</script>
+</body>
+</html>

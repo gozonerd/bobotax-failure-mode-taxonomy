@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Status Report — Failure-Mode Taxonomy Work</title>
+<meta name="description" content="Where the failure-mode taxonomy work stands as of 2026-09-13: the live equivalence-class database, source coverage across 25 taxonomies, repo activity, and what is in design.">
+<link rel="icon" href="assets/logo-chevron.svg">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar__in">
+    <a class="brandmark" href="index.html">
+      <svg viewBox="0 0 400 210" aria-hidden="true"><polygon points="200,14 392,196 316,196 200,86 84,196 8,196" fill="#F7CB4C"/><polygon points="200,70 316,196 240,196 200,142 160,196 84,196" fill="#2FA4C4"/><polygon points="200,120 268,196 132,196" fill="#B2559E"/></svg>
+      bobotax
+    </a>
+    <nav class="nav">
+      <a href="index.html">The taxonomy</a>
+      <a href="axes.html">Quad axes</a>
+      <a href="status.html" aria-current="page">Status report</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <img class="hero__chevron" src="assets/logo-chevron.svg" alt="" aria-hidden="true">
+  <div class="container">
+    <p class="eyebrow eyebrow--onDark">Status report · 13 September 2026</p>
+    <h1>Where the taxonomy work stands</h1>
+    <p class="hero__lede">Drawn from <code style="background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2);color:#E6EDF5">Martinez-Methods/mm-fm-taxonomy</code> and from the live equivalence-class database, queried directly rather than reported from documentation.</p>
+    <div class="stats">
+      <div class="stat"><div class="stat__n">336</div><div class="stat__l">Failure-mode rows</div></div>
+      <div class="stat"><div class="stat__n">152</div><div class="stat__l">Equivalence classes</div></div>
+      <div class="stat"><div class="stat__n">449</div><div class="stat__l">FM → class mappings</div></div>
+      <div class="stat"><div class="stat__n">81</div><div class="stat__l">Commits</div></div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">The shape of the work</p>
+      <h2>Two layers, deliberately separated</h2>
+    </div>
+    <div class="grid grid--2">
+      <div class="card prose">
+        <div class="card__meta">Public · derived</div>
+        <h3>The definitions layer</h3>
+        <p>105 named failure modes with mechanism descriptions, published in <code>gozonerd/bobotax-failure-mode-taxonomy</code>. This is what the rest of the world can cite.</p>
+        <p><span class="tag tag--teal">Published</span></p>
+      </div>
+      <div class="card prose">
+        <div class="card__meta">Private · evidence</div>
+        <h3>The audit and evidence layer</h3>
+        <p><code>Martinez-Methods/mm-fm-taxonomy</code> holds the audit trail, the equivalence-class database, the evidence ledger, and coverage analysis. Held privately pending anonymization.</p>
+        <p><span class="tag tag--gold">Private · going-public: true</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sunken">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">The database</p>
+      <h2>Live, and ahead of its own documentation</h2>
+      <p>A PostgreSQL 16 instance holding 38 tables in the public schema. The counts below were read from the running database on 13 September 2026.</p>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Table</th><th>Rows</th><th>What it holds</th></tr></thead>
+        <tbody>
+          <tr><td><code>failure_mode</code></td><td class="num">336</td><td>Failure modes extracted from every mapped source taxonomy</td></tr>
+          <tr><td><code>equivalence_class</code></td><td class="num">152</td><td>Deduplicated classes that unify equivalent FMs across sources</td></tr>
+          <tr><td><code>fm_ec_mapping</code></td><td class="num">449</td><td>Which source FM belongs to which equivalence class</td></tr>
+          <tr><td><code>taxonomy</code></td><td class="num">25</td><td>Source taxonomies and frameworks ingested</td></tr>
+          <tr><td><code>family</code></td><td class="num">22</td><td>Top-level groupings the classes roll up into</td></tr>
+          <tr><td><code>remediation_coverage</code></td><td class="num">176</td><td>Which ASAE aspect remediates which class, across 96 classes — STRONG 149 · PARTIAL 13 · OUT-OF-SCOPE 13 · UMBRELLA 1</td></tr>
+          <tr><td><code>bobotax_classification</code></td><td class="num">0</td><td>Per-class leverage scoring — methodology in design, see below</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert alert--teal" style="margin-top:24px">
+      <div class="alert__t">The README has been reconciled with the database</div>
+      <p>The repo README described <strong>12 published taxonomies</strong> while the database had grown to <strong>25</strong> — the ingest kept going after the README was last written. The README was corrected on 13 September 2026 and now matches the deployed schema. The table below is the current set.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">Source coverage</p>
+      <h2>25 taxonomies, four kinds</h2>
+      <p>Sources are typed, because a failure-mode catalog, a process framework, an incident database and a use-case classification do not answer the same question and should not be flattened together.</p>
+    </div>
+
+    <div class="stats" style="margin-top:0;margin-bottom:28px">
+      <div class="stat stat--light"><div class="stat__n">13</div><div class="stat__l">FM taxonomies</div></div>
+      <div class="stat stat--light"><div class="stat__n">10</div><div class="stat__l">Process frameworks</div></div>
+      <div class="stat stat--light"><div class="stat__n">1</div><div class="stat__l">Incident catalog</div></div>
+      <div class="stat stat--light"><div class="stat__n">1</div><div class="stat__l">Use-case classification</div></div>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Source</th><th>Kind</th></tr></thead>
+        <tbody>
+          <tr><td>NIST AI 100-2 Adversarial Machine Learning</td><td><span class="tag tag--teal">FM taxonomy</span></td></tr>
+          <tr><td>OWASP LLM Top 10 for LLM Applications</td><td><span class="tag tag--teal">FM taxonomy</span></td></tr>
+          <tr><td>OWASP Agentic Security Initiatives + Threats Catalogue</td><td><span class="tag tag--teal">FM taxonomy</span></td></tr>
+          <tr><td>MITRE ATLAS — Adversarial Threat Landscape for AI Systems</td><td><span class="tag tag--teal">FM taxonomy</span></td></tr>
+          <tr><td>MIT AI Risk Repository</td><td><span class="tag tag--teal">FM taxonomy</span></td></tr>
+          <tr><td>Microsoft AI Red Team Failure Mode Taxonomy</td><td><span class="tag tag--teal">FM taxonomy</span></td></tr>
+          <tr><td>Multi-Agent Security Taxonomy (MAST)</td><td><span class="tag tag--teal">FM taxonomy</span></td></tr>
+          <tr><td>OWASP Machine Learning Security Top 10</td><td><span class="tag tag--teal">FM taxonomy</span></td></tr>
+          <tr><td>Hidden Technical Debt in Machine Learning Systems (Sculley et al.)</td><td><span class="tag tag--teal">FM taxonomy</span></td></tr>
+          <tr><td>AI Vulnerability Database</td><td><span class="tag tag--teal">FM taxonomy</span></td></tr>
+          <tr><td>Model Evaluation and Threat Research (METR)</td><td><span class="tag tag--teal">FM taxonomy</span></td></tr>
+          <tr><td>AI Fairness 360 (IBM, LF AI)</td><td><span class="tag tag--teal">FM taxonomy</span></td></tr>
+          <tr><td>CSET (Georgetown) AI Harms Taxonomy</td><td><span class="tag tag--teal">FM taxonomy</span></td></tr>
+          <tr><td>Apollo Research — Scheming Evaluations Framework</td><td><span class="tag tag--gold">Process framework</span></td></tr>
+          <tr><td>Anthropic Responsible Scaling Policy</td><td><span class="tag tag--gold">Process framework</span></td></tr>
+          <tr><td>DeepMind Frontier Safety Framework</td><td><span class="tag tag--gold">Process framework</span></td></tr>
+          <tr><td>NIST AI 600-1 Generative AI Profile (AI RMF)</td><td><span class="tag tag--gold">Process framework</span></td></tr>
+          <tr><td>NIST AI Risk Management Framework 2.0</td><td><span class="tag tag--gold">Process framework</span></td></tr>
+          <tr><td>ISO/IEC 23894:2023 AI Risk Management</td><td><span class="tag tag--gold">Process framework</span></td></tr>
+          <tr><td>Google Secure AI Framework (SAIF)</td><td><span class="tag tag--gold">Process framework</span></td></tr>
+          <tr><td>FDA SaMD + Good ML Practice for Medical Device Development</td><td><span class="tag tag--gold">Process framework</span></td></tr>
+          <tr><td>Federal Reserve SR 11-7 Model Risk Management (AI-extended 2024)</td><td><span class="tag tag--gold">Process framework</span></td></tr>
+          <tr><td>OpenAI Preparedness Framework</td><td><span class="tag tag--gold">Process framework</span></td></tr>
+          <tr><td>AI Incident Database (McGregor et al.)</td><td><span class="tag tag--magenta">Incident catalog</span></td></tr>
+          <tr><td>EU AI Act Annex III High-Risk Classification</td><td><span class="tag">Use-case classification</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sunken">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">Families</p>
+      <h2>The 22 groupings classes roll up into</h2>
+    </div>
+    <div class="card">
+      <div class="taglist">
+        <span class="tag">Inference-time adversarial inputs (LLM)</span>
+        <span class="tag">Inference-time adversarial inputs (PredAI / classical ML)</span>
+        <span class="tag">Training-time poisoning</span>
+        <span class="tag">Privacy attacks</span>
+        <span class="tag">Model / IP theft</span>
+        <span class="tag">Supply chain compromise</span>
+        <span class="tag">Resource exhaustion / DoS / cost</span>
+        <span class="tag">Memory / RAG corpus integrity</span>
+        <span class="tag">Tool / plugin abuse</span>
+        <span class="tag">Excessive agency / privilege</span>
+        <span class="tag">Inter-agent coordination failures</span>
+        <span class="tag">Human-AI interface failures</span>
+        <span class="tag">Output integrity</span>
+        <span class="tag">Identity / impersonation</span>
+        <span class="tag">Discrimination / bias / unfair allocation</span>
+        <span class="tag">Transparency / accountability / provenance</span>
+        <span class="tag">Misalignment / deceptive behavior</span>
+        <span class="tag">Reconnaissance &amp; resource development</span>
+        <span class="tag">Macro-societal / governance / environmental</span>
+        <span class="tag">AI-system-specific safety limits</span>
+        <span class="tag">MLOps / ML-System tech debt</span>
+        <span class="tag">Process compliance / governance failures</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">In design</p>
+      <h2>What is deliberately not populated yet</h2>
+    </div>
+    <div class="grid grid--2">
+      <div class="alert alert--gold">
+        <div class="alert__t">Leverage scoring awaits its methodology</div>
+        <p><code>bobotax_classification</code> stands at zero rows <strong>by design, not by neglect</strong>. The table is the destination for per-class leverage scores; the methodology for mining transcripts to produce them is still being designed.</p>
+        <p>Scoring classes before that methodology is settled would bake an unexamined extraction method into the primary research output — the table stays empty until the method is worth trusting.</p>
+      </div>
+      <div class="card prose">
+        <h3>The schema predates the fourth axis</h3>
+        <p>The classification table carries three axis columns — stochasticity, human-user, and human-developer — from the May baseline.</p>
+        <p>The <a href="axes.html">quad-axes instrument</a> adds <strong>D, the deployer-org axis</strong>, in June. When the mining methodology lands, the schema picks up axis D with it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sunken">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">Process &amp; activity</p>
+      <h2>How the work is gated</h2>
+    </div>
+    <div class="grid grid--3">
+      <div class="card">
+        <div class="card__meta">ASAE policy</div>
+        <h3>strict-5</h3>
+        <p>Five consecutive passes plus two independent raters before a taxonomy decision stands.</p>
+      </div>
+      <div class="card">
+        <div class="card__meta">Audit trail</div>
+        <h3>27 gate logs</h3>
+        <p>Numbered ASAE gate logs through gate-27, plus a raw-receipts directory, retained in the repo.</p>
+      </div>
+      <div class="card">
+        <div class="card__meta">Repo activity</div>
+        <h3>81 commits</h3>
+        <p>Most recent commit 31 July 2026. Database baseline deployed via sqitch on 23 May 2026.</p>
+      </div>
+    </div>
+
+    <div class="card prose" style="margin-top:20px">
+      <p class="eyebrow">Intake</p>
+      <h3>Proposed failure modes are staged before they are numbered</h3>
+      <p>The <code>proposed-failure-modes/</code> directory is a pre-canon staging area: entries live there awaiting taxonomy-owner consideration, and no FM number is claimed until they are considered.</p>
+      <p>Currently staged: <strong>PFM-001 — Review channel silently drops annotations</strong>, a tooling-integrity failure in which a human reviewer's annotations are lost with no error surfaced, converting the scarcest input in the loop into zero yield.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container--md">
+    <div class="card prose">
+      <p class="eyebrow">How these numbers were taken</p>
+      <h3>Provenance of this report</h3>
+      <ul>
+        <li>Row counts and the taxonomy list were <strong>queried directly</strong> against the running PostgreSQL 16 database on 13 September 2026 — not read from documentation.</li>
+        <li>Commit count, gate-log count and the staged proposal were read from the working tree of <code>Martinez-Methods/mm-fm-taxonomy</code>.</li>
+        <li>The 105-failure-mode figure and the derived-layer scope come from <code>gozonerd/bobotax-failure-mode-taxonomy</code>.</li>
+        <li>Where the database and the README disagreed, this report followed the database — and the README was then corrected to match.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <img class="footer__chevron" src="assets/logo-chevron.svg" alt="" aria-hidden="true">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <h4>bobotax</h4>
+        <p style="font-size:var(--text-sm);max-width:34ch">AI failure-mode taxonomy and the responsibility framework that governs what happens after.</p>
+      </div>
+      <div>
+        <h4>On this site</h4>
+        <ul>
+          <li><a href="index.html">The taxonomy</a></li>
+          <li><a href="axes.html">The quad axes</a></li>
+          <li><a href="status.html">Status report</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Repositories</h4>
+        <ul>
+          <li>gozonerd/bobotax-failure-mode-taxonomy</li>
+          <li>Martinez-Methods/mm-fm-taxonomy</li>
+          <li>nerdykrystal/ftm-explorer</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__base">
+      <span>Krystal Martinez · Martinez Methods</span>
+      <span>Status as of 13 September 2026</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

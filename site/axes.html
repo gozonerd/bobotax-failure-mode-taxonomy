@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Quad Axes of Prevention Leverage — bobotax</title>
+<meta name="description" content="An interactive four-axis instrument for asking where the lever is on an AI failure: the model run, the human using it, the deployer-org, and the model developer.">
+<link rel="icon" href="assets/logo-chevron.svg">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar__in">
+    <a class="brandmark" href="index.html">
+      <svg viewBox="0 0 400 210" aria-hidden="true"><polygon points="200,14 392,196 316,196 200,86 84,196 8,196" fill="#F7CB4C"/><polygon points="200,70 316,196 240,196 200,142 160,196 84,196" fill="#2FA4C4"/><polygon points="200,120 268,196 132,196" fill="#B2559E"/></svg>
+      bobotax
+    </a>
+    <nav class="nav">
+      <a href="index.html">The taxonomy</a>
+      <a href="axes.html" aria-current="page">Quad axes</a>
+      <a href="status.html">Status report</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <img class="hero__chevron" src="assets/logo-chevron.svg" alt="" aria-hidden="true">
+  <div class="container">
+    <p class="eyebrow eyebrow--onDark">Interactive artifact</p>
+    <h1>The Quad Axes of Prevention Leverage</h1>
+    <p class="hero__lede">Not a blame chart. Each axis is a <strong>lever on the future</strong>: how much would a change at this level keep this failure from recurring? Drag a lever out to claim more leverage there — the shaded shape is the failure's <em>leverage fingerprint</em>.</p>
+  </div>
+</section>
+<hr class="rule">
+
+<section class="section">
+  <div class="container">
+    <div class="alert alert--teal" style="margin-bottom:32px">
+      <div class="alert__t">↻ Forward-looking, by construction</div>
+      <p>The question is never "whose fault was it?" — it's "where is the lever for next time?" A frozen model keeps shipping as-is unless <em>someone</em> changes something. bobotax asks: who has the longest lever?</p>
+    </div>
+
+    <div class="frame">
+      <iframe id="axesFrame" src="quad-axes.html" title="Interactive quad-axes instrument — drag each axis handle to set its prevention leverage"></iframe>
+    </div>
+    <p class="framenote">Drag the four handles, or load a preset. Prefer it full-window? <a href="quad-axes.html">Open the instrument on its own</a>.</p>
+  </div>
+</section>
+
+<section class="section section--sunken">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">The four levers</p>
+      <h2>What each axis holds</h2>
+      <p>Two axes carry a persona and two do not — and the distinction between B and D is the one the instrument exists to force.</p>
+    </div>
+
+    <div class="grid grid--2">
+      <div class="card">
+        <div class="axis">
+          <div class="axis__key" style="background:#2563eb">C</div>
+          <div>
+            <h3>The model developer 🏛️</h3>
+            <p>The lab's humans — who chose the corpus, the RLHF, the architecture, and shipped the weights.</p>
+            <p class="axis__lever"><b>Lever:</b> a differently-built model.</p>
+            <p class="axis__lever">Made of humans making choices — and the axis no industry taxonomy will name. Adverse-to-deflation by design.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="axis">
+          <div class="axis__key" style="background:#7c3aed">A</div>
+          <div>
+            <h3>The model run / stochasticity 🎲</h3>
+            <p>The dice at runtime — the same prompt resampled.</p>
+            <p class="axis__lever"><b>Lever:</b> re-run, self-consistency, an output gate.</p>
+            <p class="axis__lever">A thing, not a person — no persona. High only for genuinely run-unstable failures.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="axis">
+          <div class="axis__key" style="background:#db2777">D</div>
+          <div>
+            <h3>The deployer-org / orchestration 🧩</h3>
+            <p>The team that built the deployment <em>around</em> the model.</p>
+            <p class="axis__lever"><b>Lever:</b> the RAG corpus, system prompt, tool wiring, guardrails, model-version choice.</p>
+            <p class="axis__lever">A team with a persona. Distinct from B. (The "K4" finding that earned this axis.)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="axis">
+          <div class="axis__key" style="background:#f59e0b">B</div>
+          <div>
+            <h3>The human using it 🧑‍💻</h3>
+            <p>The person who prompts and operates it — the doctor typing the query.</p>
+            <p class="axis__lever"><b>Lever:</b> a better-formed request, added context, a user-side check.</p>
+            <p class="axis__lever">A person with a persona. Distinct from D.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container--md">
+    <div class="grid grid--2">
+      <div class="card prose">
+        <p class="eyebrow">How to read a fingerprint</p>
+        <h3>Presets worth trying</h3>
+        <ul>
+          <li><strong>Run-unstable glitch</strong> — A dominates; re-running fixes it.</li>
+          <li><strong>User mis-prompt</strong> — B carries the lever.</li>
+          <li><strong>Baked-in bias</strong> — C, and only C, moves the needle.</li>
+          <li><strong>Bad RAG / guardrail</strong> — a D-shaped failure that looks like a model failure.</li>
+          <li><strong>Solo build → B = D collapse</strong> — when the operator <em>is</em> the deployer, the two axes fuse.</li>
+        </ul>
+      </div>
+      <div class="card prose">
+        <p class="eyebrow">Provenance</p>
+        <h3>About this artifact</h3>
+        <p>This is the canonical quad-axes instrument, dated <strong>2026-06-03</strong>, embedded unmodified — its axis colors are load-bearing and are preserved exactly as authored.</p>
+        <p>The site chrome around it is built on the Empowered Teams &amp; Systems design system.</p>
+        <p><a href="status.html">See where the axes sit in the live schema →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <img class="footer__chevron" src="assets/logo-chevron.svg" alt="" aria-hidden="true">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <h4>bobotax</h4>
+        <p style="font-size:var(--text-sm);max-width:34ch">AI failure-mode taxonomy and the responsibility framework that governs what happens after.</p>
+      </div>
+      <div>
+        <h4>On this site</h4>
+        <ul>
+          <li><a href="index.html">The taxonomy</a></li>
+          <li><a href="axes.html">The quad axes</a></li>
+          <li><a href="status.html">Status report</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Repositories</h4>
+        <ul>
+          <li>gozonerd/bobotax-failure-mode-taxonomy</li>
+          <li>Martinez-Methods/mm-fm-taxonomy</li>
+          <li>nerdykrystal/ftm-explorer</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__base">
+      <span>Krystal Martinez · Martinez Methods</span>
+      <span>Derived layer published · evidence layer private</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+/* Same-origin: size the artifact frame to its own content so nothing scrolls inside it.
+   Two traps this avoids:
+   1. The artifact sets body{min-height:100vh}; inside a frame 100vh IS the frame height, so
+      anything read off body/documentElement scrollHeight feeds back and grows without bound.
+      We measure the furthest bottom edge of body's own children instead — height-independent.
+   2. A hidden/zero-width pane lays the artifact out at ~0px wide, which wraps its text into a
+      wildly tall column. We refuse to measure until the frame actually has width, and re-fit
+      on any WIDTH change (never on our own height change). */
+(function(){
+  var f=document.getElementById('axesFrame');
+  if(!f) return;
+  var MIN=560, MAX=3000, lastW=-1;
+
+  function doc(){ try{ return f.contentDocument; }catch(e){ return null; } }
+
+  function contentHeight(d){
+    var kids=d.body.children, bottom=0;
+    for(var i=0;i<kids.length;i++){
+      var k=kids[i];
+      if(k.tagName==='SCRIPT'||k.tagName==='STYLE') continue;
+      var b=k.offsetTop+k.offsetHeight;
+      if(b>bottom) bottom=b;
+    }
+    return bottom+(parseFloat(getComputedStyle(d.body).paddingBottom)||0);
+  }
+
+  function fit(){
+    var d=doc();
+    if(!d||!d.body) return;
+    var w=f.getBoundingClientRect().width;
+    if(!(w>1)) return;                      // hidden pane — leave the CSS fallback height
+    lastW=Math.round(w);
+    var h=contentHeight(d);
+    if(!(h>0)) return;
+    f.style.height=Math.min(Math.max(Math.round(h)+8,MIN),MAX)+'px';
+  }
+
+  f.addEventListener('load',function(){
+    fit(); setTimeout(fit,200);
+    var d=doc();
+    if(d&&d.fonts&&d.fonts.ready) d.fonts.ready.then(fit).catch(function(){});
+  });
+
+  var t;
+  function schedule(){ clearTimeout(t); t=setTimeout(fit,180); }
+  window.addEventListener('resize',schedule);
+  document.addEventListener('visibilitychange',schedule);
+
+  if(window.ResizeObserver){
+    new ResizeObserver(function(entries){
+      var w=Math.round(entries[0].contentRect.width);
+      if(w!==lastW) schedule();             // width moved — our own height edits never trip this
+    }).observe(f);
+  }
+
+  if(doc() && doc().readyState==='complete') fit();
+})();
+</script>
+</body>
+</html>

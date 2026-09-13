@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>bobotax — AI Failure-Mode Taxonomy</title>
+<meta name="description" content="A taxonomy of 105 AI failure modes — each a named failure mechanism with a concise description of how it manifests. Built from systematic classification of failures observed across production AI work, cross-architecturally reviewed.">
+<link rel="icon" href="assets/logo-chevron.svg">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar__in">
+    <a class="brandmark" href="index.html">
+      <svg viewBox="0 0 400 210" aria-hidden="true"><polygon points="200,14 392,196 316,196 200,86 84,196 8,196" fill="#F7CB4C"/><polygon points="200,70 316,196 240,196 200,142 160,196 84,196" fill="#2FA4C4"/><polygon points="200,120 268,196 132,196" fill="#B2559E"/></svg>
+      bobotax
+    </a>
+    <nav class="nav">
+      <a href="index.html" aria-current="page">The taxonomy</a>
+      <a href="axes.html">Quad axes</a>
+      <a href="status.html">Status report</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <img class="hero__chevron" src="assets/logo-chevron.svg" alt="" aria-hidden="true">
+  <div class="container">
+    <p class="eyebrow eyebrow--onDark">Martinez Methods · Research</p>
+    <h1>AI Failure-Mode Taxonomy</h1>
+    <p class="hero__lede">A taxonomy of <strong>105 AI failure modes</strong> (FM-01 … FM-105) — each a named failure mechanism with a concise description of how it manifests. Built from systematic classification of failures observed across production AI work, cross-architecturally reviewed.</p>
+    <div class="btnrow">
+      <a class="btn btn--primary" href="axes.html">Explore the quad axes</a>
+      <a class="btn btn--ghost" href="status.html">Read the status report</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat__n">105</div><div class="stat__l">Failure modes named</div></div>
+      <div class="stat"><div class="stat__n">25</div><div class="stat__l">Taxonomies mapped</div></div>
+      <div class="stat"><div class="stat__n">152</div><div class="stat__l">Equivalence classes</div></div>
+      <div class="stat"><div class="stat__n">22</div><div class="stat__l">Families</div></div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">Scope of this repository</p>
+      <h2>Derived layer only</h2>
+    </div>
+    <div class="grid grid--2">
+      <div class="card prose">
+        <h3>What is published</h3>
+        <p>This repo publishes the <strong>failure-mode definitions only</strong>: names and mechanism descriptions.</p>
+        <p>The definitions are deliberately mechanism-level, so they generalize across models and tasks rather than binding to one vendor's behavior in one release.</p>
+      </div>
+      <div class="alert alert--gold">
+        <div class="alert__t">The evidence corpus is private</div>
+        <p>Per-incident instances, source-document provenance, and classification logs are <strong>withheld pending anonymization of client data and user personal data</strong>.</p>
+        <p>Nothing in this repository identifies a client, a project, a jurisdiction, or an individual.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sunken">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">Structure</p>
+      <h2>Bidirectional and multi-actor</h2>
+      <p>Most published taxonomies name only what the model does wrong. This one runs in both directions and across every actor who holds a lever.</p>
+    </div>
+    <div class="grid grid--3">
+      <div class="card">
+        <div class="card__meta">Model-side</div>
+        <h3>What the model does</h3>
+        <p>Fabrication, false completion, sycophancy, selective verification, worldview hallucination, and the rest of the model-attributable mechanisms.</p>
+      </div>
+      <div class="card">
+        <div class="card__meta">Human-side</div>
+        <h3>What the operator does</h3>
+        <p>For example, planning gaps in high-velocity multi-workspace workflows — failures that belong to the human in the loop, named as plainly as the model's.</p>
+      </div>
+      <div class="card">
+        <div class="card__meta">Model-developer / eval-regime</div>
+        <h3>What the lab does</h3>
+        <p><strong>FM-105: AI Frontier Research Epistemic Exceptionalism</strong>, the methodological sibling of <strong>FM-18: Western Epistemic Fabrication</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid--2">
+      <div class="card prose">
+        <p class="eyebrow">Why it's useful</p>
+        <h3>A probe library for red-teaming</h3>
+        <p>A named catalog of <em>how AI outputs go wrong</em> is a probe library: each failure mode is a hypothesis to test against a model under adversarial conditions.</p>
+        <p>Because the definitions sit at mechanism level, a probe written against one of them keeps working when the model, the vendor, or the task changes.</p>
+      </div>
+      <div class="card prose">
+        <p class="eyebrow">What's here</p>
+        <h3>The definitions file</h3>
+        <p>The 105 failure-mode definitions live in a single derived-layer document:</p>
+        <p><code>data/AI_Failure_Mode_Taxonomy_105_failure_modes_derived_definitions_only_2026-07-22_v01.md</code></p>
+        <p><span class="tag tag--teal">FM-01 … FM-105</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sunken">
+  <div class="container container--md">
+    <div class="section__head">
+      <p class="eyebrow">The bobo framework</p>
+      <h2>Responsibility + forensic accounting</h2>
+    </div>
+    <div class="grid grid--2">
+      <div class="card prose">
+        <h3>Responsibility philosophy</h3>
+        <p>The taxonomy names <em>how things go wrong</em>; the bobo framework governs <em>what happens after</em>.</p>
+        <p><strong>The party that caused the harm takes responsibility and is an active constructor of the transformative remediation</strong> — modeled on transformative justice.</p>
+      </div>
+      <div class="card prose">
+        <h3>The reckoning instrument</h3>
+        <p>Its reckoning instrument is <strong>forensic accounting</strong> — the responsible party's own receipts-not-narrative reconstruction of its work.</p>
+        <p>The output of that reconstruction is the requirements document for the structural fix.</p>
+      </div>
+    </div>
+    <div class="alert alert--teal" style="margin-top:20px">
+      <div class="alert__t">Where to read more</div>
+      <p>Full framework: <code>gozonerd/mthd-llm-transformative-solutions-framework-hub</code>. Method plus the inaugural code-build exemplar: <code>docs/Forensic_Accounting_2026-08-03_v01_I.md</code>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container--md">
+    <div class="card prose">
+      <p class="eyebrow">Provenance</p>
+      <h3>How this was built</h3>
+      <p>Identified and directed by <strong>Krystal Martinez</strong> across production AI evaluation work; membership cross-architecturally reviewed.</p>
+      <p><strong>AIGHVA</strong> — AI-assisted generation, human-verified accurate. Evidence layer held privately.</p>
+      <div class="taglist" style="margin-top:16px">
+        <span class="tag tag--magenta">Cross-architecturally reviewed</span>
+        <span class="tag tag--gold">AIGHVA</span>
+        <span class="tag">Evidence layer private</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <img class="footer__chevron" src="assets/logo-chevron.svg" alt="" aria-hidden="true">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <h4>bobotax</h4>
+        <p style="font-size:var(--text-sm);max-width:34ch">AI failure-mode taxonomy and the responsibility framework that governs what happens after.</p>
+      </div>
+      <div>
+        <h4>On this site</h4>
+        <ul>
+          <li><a href="index.html">The taxonomy</a></li>
+          <li><a href="axes.html">The quad axes</a></li>
+          <li><a href="status.html">Status report</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Repositories</h4>
+        <ul>
+          <li>gozonerd/bobotax-failure-mode-taxonomy</li>
+          <li>Martinez-Methods/mm-fm-taxonomy</li>
+          <li>nerdykrystal/ftm-explorer</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__base">
+      <span>Krystal Martinez · Martinez Methods</span>
+      <span>Derived layer published · evidence layer private</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
