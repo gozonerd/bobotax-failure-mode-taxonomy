@@ -27,5 +27,7 @@ The taxonomy names *how things go wrong*; the bobo framework governs *what happe
 
 The incidents this taxonomy is derived from are first written as **failure incident reports**: one report per incident, from the primary transcript record, with no failure-mode names or classification in them, so that failure modes emerge from the data. The template (v01, every enumerated value defined), three filled May 2026 examples, and the protocol that produces the reports live in the private workbench **`gozonerd/pre-transcript-synopses-workbench`** under `prompts/`. What a report is and what this repo takes from it: `docs/Failure_Incident_Reports_2026-10-31_v01_I.md`.
 
+**Drive complement.** Files that belong with this taxonomy but are not committed here (today: the month ledgers of failure-incident reports as CSV) live in the Google Drive folder **`bobotax-failure-mode-taxonomy-mirror`** on the nerdykrystal Drive (folder id `1w9bVgVNyvj318OyBbp5EM7TXeNwo7wdq`, `rclone` remote `nk:`; `ledger/` inside it). Its README points back here. The two are complements today and are meant to become mirrors whose only difference is the pointers each carries to the other.
+
 ## Provenance
 Identified and directed by Krystal Martinez across production AI evaluation work; membership cross-architecturally reviewed. AIGHVA (AI-assisted generation, human-verified accurate). Evidence layer held privately.

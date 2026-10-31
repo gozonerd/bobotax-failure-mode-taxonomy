@@ -32,6 +32,18 @@ The apparatus is in the private workbench **`gozonerd/pre-transcript-synopses-wo
 - **First-pass incident data for the taxonomy's evidence layer**, written before any failure-mode vocabulary touches it. The audit and evidence layer (`Martinez-Methods/mm-fm-taxonomy`) is downstream of these reports, not upstream.
 - **A catch-attribution record**: each report says who caught the incident, including the honest cases where nobody did at the time and the mining pass found it months later. That field is what makes a later count of unnoticed failures possible.
 
+## The month ledger, and where it lands
+
+Each month's final reports are indexed in a **ledger**: one row per report, every value read from the report's yaml header, no severity and no classification (Krystal Martinez's ruling R42, 2026-10-31: a tally sheet over a flat index, with the month's cross-session links appended, every tally tile defined in a tooltip). The builder is `tools/fi_ledger.py` in the workbench.
+
+The ledger's printed HTML goes to Krystal Martinez's print folder. The CSV lands on Google Drive, in the folder **`bobotax-failure-mode-taxonomy-mirror`** on the nerdykrystal Drive (folder id `1w9bVgVNyvj318OyBbp5EM7TXeNwo7wdq`; `nk:bobotax-failure-mode-taxonomy-mirror/ledger/` by `rclone`), this repo's Drive complement. Her ruling of 2026-10-31: a ledger could be committed to this public repo, but that decision does not scale file by file, so the CSV goes to the Drive complement and this repo points at it. A row names the session, the persona who failed and who caught the incident, and nothing from the transcript.
+
+| What | Where |
+|---|---|
+| Ledger CSVs, one per month per build | Drive: `bobotax-failure-mode-taxonomy-mirror/ledger/` |
+| The Drive folder's own README and manifest | Drive: `bobotax-failure-mode-taxonomy-mirror/README.md`, `MANIFEST.tsv` |
+| The July 2026 evidence bundles (corpus, open-decisions state, adjudication) | Drive: `Gozo Nerd Universo Archive/bobotax-failure-mode-taxonomy/` (folder id `10A9uw7TKtTN1UvZBXVP3TuVGyMufcyw6`) |
+
 ## Status
 
-Template v01 and the three examples were approved by Krystal Martinez on 2026-10-31. The first production batch (the first half of May 2026) has not yet run.
+Template v01 and the three examples were approved by Krystal Martinez on 2026-10-31; the ledger shape was ruled the same day and the builder exists. The first production batch (the first half of May 2026) has not yet run; the Drive folder holds a demo ledger built from the three examples.
