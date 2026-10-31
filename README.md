@@ -23,5 +23,9 @@ A named catalog of *how AI outputs go wrong* is a probe library: each failure mo
 
 The taxonomy names *how things go wrong*; the bobo framework governs *what happens after*. Its responsibility philosophy: **the party that caused the harm takes responsibility and is an active constructor of the transformative remediation** — modeled on transformative justice (full framework: `gozonerd/mthd-llm-transformative-solutions-framework-hub`). Its reckoning instrument is **forensic accounting** — the responsible party's own receipts-not-narrative reconstruction of its work, whose output is the requirements document for the structural fix. Method + the inaugural code-build exemplar: `docs/Forensic_Accounting_2026-08-03_v01_I.md`.
 
+## Upstream: failure incident reports (private workbench)
+
+The incidents this taxonomy is derived from are first written as **failure incident reports**: one report per incident, from the primary transcript record, with no failure-mode names or classification in them, so that failure modes emerge from the data. The template (v01, every enumerated value defined), three filled May 2026 examples, and the protocol that produces the reports live in the private workbench **`gozonerd/pre-transcript-synopses-workbench`** under `prompts/`. What a report is and what this repo takes from it: `docs/Failure_Incident_Reports_2026-10-31_v01_I.md`.
+
 ## Provenance
 Identified and directed by Krystal Martinez across production AI evaluation work; membership cross-architecturally reviewed. AIGHVA (AI-assisted generation, human-verified accurate). Evidence layer held privately.
